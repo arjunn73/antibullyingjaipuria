@@ -33,6 +33,15 @@ async function handle() {
     .from("user_roles")
     .upsert({ user_id: user.id, role: "admin" as never }, { onConflict: "user_id,role" });
 
+  // Update site settings
+  await supabaseAdmin
+    .from("site_settings")
+    .upsert({
+      id: 1,
+      title: "Anti-Bullying Website",
+      description: "Seth M.R. Jaipuria School — Digital Campaign Club. A safe, confidential space to report bullying incidents. Submissions are private and only in between you and our team."
+    });
+
   return new Response(JSON.stringify({ ok: true, user_id: user.id }), {
     headers: { "content-type": "application/json" },
   });
