@@ -130,6 +130,27 @@ function ReportPage() {
           <Field label="Witness" hint="Optional — anyone who saw what happened.">
             <Input value={form.witness} onChange={(e) => setForm({ ...form, witness: e.target.value })} maxLength={500} />
           </Field>
+          <Field label="Witness Photo" hint="Optional — attach a photo as evidence (max 10 MB). Only admins can view it.">
+            {photoPreview ? (
+              <div className="relative inline-block">
+                <img src={photoPreview} alt="Witness evidence preview" className="max-h-48 rounded-lg border border-border" />
+                <button
+                  type="button"
+                  onClick={removePhoto}
+                  className="absolute -right-2 -top-2 rounded-full bg-destructive p-1 text-destructive-foreground shadow"
+                  aria-label="Remove photo"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            ) : (
+              <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-muted/40 px-4 py-6 text-sm text-muted-foreground hover:bg-muted">
+                <ImagePlus className="h-5 w-5" />
+                <span>Click to upload a photo</span>
+                <input type="file" accept="image/*" className="hidden" onChange={handlePhotoChange} />
+              </label>
+            )}
+          </Field>
           <Button type="submit" size="lg" disabled={submitting} className="w-full">
             <Send className="mr-2 h-4 w-4" />
             {submitting ? "Sending…" : "Send Report"}
