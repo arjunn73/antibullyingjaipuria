@@ -49,12 +49,6 @@ function AdminPage() {
     setSettings(st as Settings | null);
   }
 
-  async function claimAdmin() {
-    const { data, error } = await supabase.rpc("claim_admin");
-    if (error) return toast.error(error.message);
-    if (data) { toast.success("You are now admin"); setIsAdmin(true); await refresh(); }
-    else toast.error("An admin already exists");
-  }
 
   async function signOut() {
     await supabase.auth.signOut();
@@ -105,10 +99,9 @@ function AdminPage() {
         <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-8 text-center shadow-sm">
           <h1 className="text-xl font-bold">Not an admin</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            You're signed in but don't have admin access. If no admin has been set up yet, you can claim it below.
+            You're signed in but don't have admin access.
           </p>
-          <div className="mt-6 flex flex-col gap-2">
-            <Button onClick={claimAdmin}>Claim admin role</Button>
+          <div className="mt-6">
             <Button variant="ghost" onClick={signOut}>Sign out</Button>
           </div>
         </div>
