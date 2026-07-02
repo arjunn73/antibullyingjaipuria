@@ -12,7 +12,7 @@ import { LogOut, Reply, Ban, CheckCircle2, MessageSquare, Palette, Trash2 } from
 
 type Incident = {
   id: string; tracking_code: string; name: string; class_teacher: string; class_name: string;
-  problem: string; witness: string | null; reply: string | null;
+  problem: string; witness: string | null; witness_photo_path: string | null; reply: string | null;
   replied_at: string | null; is_blocked: boolean; created_at: string;
 };
 type Settings = { id: number; title: string; description: string; primary_color: string; accent_color: string };
