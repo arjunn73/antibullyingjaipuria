@@ -35,14 +35,16 @@ function ReportPage() {
       return;
     }
     setSubmitting(true);
-    const { data, error } = await supabase
-      .from("incidents")
-      .insert({ ...parsed.data, witness: parsed.data.witness || null })
-      .select("tracking_code")
-      .single();
+    const { data, error } = await supabase.rpc("submit_incident", {
+      _name: parsed.data.name,
+      _class_teacher: parsed.data.class_teacher,
+      _class_name: parsed.data.class_name,
+      _problem: parsed.data.problem,
+      _witness: parsed.data.witness || undefined,
+    });
     setSubmitting(false);
-    if (error) { toast.error(error.message); return; }
-    setSubmitted({ code: data.tracking_code });
+    if (error || !data) { toast.error(error?.message ?? "Failed to submit"); return; }
+    setSubmitted({ code: data as string });
   }
 
   if (submitted) {

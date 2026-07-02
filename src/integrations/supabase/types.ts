@@ -124,6 +124,16 @@ export type Database = {
           witness: string
         }[]
       }
+      submit_incident: {
+        Args: {
+          _class_name: string
+          _class_teacher: string
+          _name: string
+          _problem: string
+          _witness?: string
+        }
+        Returns: string
+      }
     }
     Enums: {
       app_role: "admin" | "user"
