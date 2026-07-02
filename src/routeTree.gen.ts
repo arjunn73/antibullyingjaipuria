@@ -15,6 +15,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TrackCodeRouteImport } from './routes/track.$code'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as ApiPublicSetupAdminRouteImport } from './routes/api/public/setup-admin'
 
 const ReportRoute = ReportRouteImport.update({
   id: '/report',
@@ -45,6 +46,11 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ApiPublicSetupAdminRoute = ApiPublicSetupAdminRouteImport.update({
+  id: '/api/public/setup-admin',
+  path: '/api/public/setup-admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/report': typeof ReportRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/track/$code': typeof TrackCodeRoute
+  '/api/public/setup-admin': typeof ApiPublicSetupAdminRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/report': typeof ReportRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/track/$code': typeof TrackCodeRoute
+  '/api/public/setup-admin': typeof ApiPublicSetupAdminRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -68,12 +76,25 @@ export interface FileRoutesById {
   '/report': typeof ReportRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/track/$code': typeof TrackCodeRoute
+  '/api/public/setup-admin': typeof ApiPublicSetupAdminRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/report' | '/admin' | '/track/$code'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/report'
+    | '/admin'
+    | '/track/$code'
+    | '/api/public/setup-admin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/report' | '/admin' | '/track/$code'
+  to:
+    | '/'
+    | '/auth'
+    | '/report'
+    | '/admin'
+    | '/track/$code'
+    | '/api/public/setup-admin'
   id:
     | '__root__'
     | '/'
@@ -82,6 +103,7 @@ export interface FileRouteTypes {
     | '/report'
     | '/_authenticated/admin'
     | '/track/$code'
+    | '/api/public/setup-admin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -90,6 +112,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ReportRoute: typeof ReportRoute
   TrackCodeRoute: typeof TrackCodeRoute
+  ApiPublicSetupAdminRoute: typeof ApiPublicSetupAdminRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -136,6 +159,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/public/setup-admin': {
+      id: '/api/public/setup-admin'
+      path: '/api/public/setup-admin'
+      fullPath: '/api/public/setup-admin'
+      preLoaderRoute: typeof ApiPublicSetupAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -156,7 +186,18 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ReportRoute: ReportRoute,
   TrackCodeRoute: TrackCodeRoute,
+  ApiPublicSetupAdminRoute: ApiPublicSetupAdminRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
