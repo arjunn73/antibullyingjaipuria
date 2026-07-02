@@ -27,6 +27,7 @@ export type Database = {
           reply: string | null
           tracking_code: string
           witness: string | null
+          witness_photo_path: string | null
         }
         Insert: {
           class_name: string
@@ -40,6 +41,7 @@ export type Database = {
           reply?: string | null
           tracking_code?: string
           witness?: string | null
+          witness_photo_path?: string | null
         }
         Update: {
           class_name?: string
@@ -53,6 +55,7 @@ export type Database = {
           reply?: string | null
           tracking_code?: string
           witness?: string | null
+          witness_photo_path?: string | null
         }
         Relationships: []
       }
@@ -131,6 +134,7 @@ export type Database = {
           _name: string
           _problem: string
           _witness?: string
+          _witness_photo_path?: string
         }
         Returns: string
       }
