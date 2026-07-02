@@ -164,6 +164,7 @@ function AdminPage() {
                 <div className="mt-4 space-y-2 rounded-lg bg-muted p-4 text-sm">
                   <div><span className="font-medium">Problem:</span> <span className="whitespace-pre-wrap">{i.problem}</span></div>
                   {i.witness && <div><span className="font-medium">Witness:</span> {i.witness}</div>}
+                  {i.witness_photo_path && <EvidencePhoto path={i.witness_photo_path} />}
                 </div>
 
                 {i.reply ? (
