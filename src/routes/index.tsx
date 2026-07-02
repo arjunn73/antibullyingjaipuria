@@ -70,7 +70,7 @@ function Index() {
               <Search className="h-5 w-5" style={{ color: primary }} />
             </div>
             <div className="flex-1">
-              <h2 className="text-lg font-semibold" style={{ color: accent }}>Check for an Admin Reply</h2>
+              <h2 className="text-lg font-semibold" style={{ color: accent }}>Check for an Our Teams Reply</h2>
               <p className="mt-1 text-sm text-muted-foreground">
                 Enter the tracking code you received after submitting your report.
               </p>
