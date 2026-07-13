@@ -6,18 +6,18 @@ import { ShieldCheck, FileText, Search, Lock } from "lucide-react";
 
 const PRIMARY = "#2563eb";
 const ACCENT = "#0f172a";
-const SITE_TITLE = "Anti-Bullying Website";
+const SITE_TITLE = "Bullying Prevention Online Help Desk";
 const SITE_DESCRIPTION =
-  "Seth M.R. Jaipuria School — Digital Campaign Club. A safe, confidential space to report bullying incidents. Submissions are private and only in between you and our team.";
+  "If you’re going through something, you’re not alone.\n\nSeth M.R. Jaipuria School, Digital Campaign Club, brings you a safe, confidential place to report bullying.\n\nRest assured, we’re here to listen and support you.";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Ummeed- You matter here. -A confidential space to speak up" },
-      { name: "description", content: "A confidential space for students at Seth M.R. Jaipuria School to report bullying. Submissions are private and answered by school administrators." },
-      { property: "og:title", content: "Ummeed- You matter here. -A confidential space to speak up" },
-      { property: "og:description", content: "A confidential space for students at Seth M.R. Jaipuria School to report bullying. Submissions are private and answered by school administrators." },
+      { title: "Bullying Prevention Online Help Desk — Seth M.R. Jaipuria School" },
+      { name: "description", content: "If you’re going through something, you’re not alone. Seth M.R. Jaipuria School, Digital Campaign Club, brings you a safe, confidential place to report bullying." },
+      { property: "og:title", content: "Bullying Prevention Online Help Desk — Seth M.R. Jaipuria School" },
+      { property: "og:description", content: "If you’re going through something, you’re not alone. Seth M.R. Jaipuria School, Digital Campaign Club, brings you a safe, confidential place to report bullying." },
       { property: "og:url", content: "https://digitalcampaign.lovable.app/" },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b2d8253b-04e6-4b05-92dc-fbde9f996267" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b2d8253b-04e6-4b05-92dc-fbde9f996267" },
@@ -29,9 +29,9 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          name: "Seth M.R. Jaipuria School — Anti-Bullying Reporting",
+          name: "Bullying Prevention Online Help Desk — Seth M.R. Jaipuria School",
           url: "https://digitalcampaign.lovable.app/",
-          description: "Confidential bullying incident reporting for Seth M.R. Jaipuria School, run by the Digital Campaign Club.",
+          description: "If you’re going through something, you’re not alone. Seth M.R. Jaipuria School, Digital Campaign Club, brings you a safe, confidential place to report bullying.",
           publisher: {
             "@type": "EducationalOrganization",
             name: "Seth M.R. Jaipuria School",
