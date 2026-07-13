@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /auth
+Disallow: /track/
+
+Sitemap: https://digitalcampaign.lovable.app/sitemap.xml

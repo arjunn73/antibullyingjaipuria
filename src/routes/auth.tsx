@@ -11,6 +11,17 @@ const EMAIL_DOMAIN = "@jaipuria.local";
 
 export const Route = createFileRoute("/auth")({
   component: AuthPage,
+  head: () => ({
+    meta: [
+      { title: "Admin Sign In — Anti-Bullying Reporting" },
+      { name: "description", content: "Administrator sign-in for the Seth M.R. Jaipuria School anti-bullying reporting panel." },
+      { name: "robots", content: "noindex, nofollow" },
+      { property: "og:title", content: "Admin Sign In — Anti-Bullying Reporting" },
+      { property: "og:description", content: "Administrator sign-in for the Seth M.R. Jaipuria School anti-bullying reporting panel." },
+      { property: "og:url", content: "https://digitalcampaign.lovable.app/auth" },
+    ],
+    links: [{ rel: "canonical", href: "https://digitalcampaign.lovable.app/auth" }],
+  }),
 });
 
 function AuthPage() {
@@ -55,8 +66,10 @@ function AuthPage() {
 
           <form onSubmit={submit} className="mt-6 space-y-4">
             <div>
-              <Label>Username</Label>
+              <Label htmlFor="admin-username">Username</Label>
               <Input
+                id="admin-username"
+                name="username"
                 autoComplete="username"
                 required
                 value={username}
@@ -65,8 +78,10 @@ function AuthPage() {
               />
             </div>
             <div>
-              <Label>Password</Label>
+              <Label htmlFor="admin-password">Password</Label>
               <Input
+                id="admin-password"
+                name="password"
                 type="password"
                 autoComplete="current-password"
                 required

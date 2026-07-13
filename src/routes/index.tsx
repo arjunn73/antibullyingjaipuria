@@ -9,6 +9,34 @@ type Settings = { title: string; description: string; primary_color: string; acc
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "Anti-Bullying Reporting — Seth M.R. Jaipuria School" },
+      { name: "description", content: "A confidential space for students at Seth M.R. Jaipuria School to report bullying. Submissions are private and answered by school administrators." },
+      { property: "og:title", content: "Anti-Bullying Reporting — Seth M.R. Jaipuria School" },
+      { property: "og:description", content: "A confidential space for students at Seth M.R. Jaipuria School to report bullying. Submissions are private and answered by school administrators." },
+      { property: "og:url", content: "https://digitalcampaign.lovable.app/" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1c7dcb21-f134-4140-89be-7c95bdd9a3ab/id-preview-1ee534f7--0e7101ed-f35e-494d-ac7d-146e84ea5303.lovable.app-1782971400784.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1c7dcb21-f134-4140-89be-7c95bdd9a3ab/id-preview-1ee534f7--0e7101ed-f35e-494d-ac7d-146e84ea5303.lovable.app-1782971400784.png" },
+    ],
+    links: [{ rel: "canonical", href: "https://digitalcampaign.lovable.app/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Seth M.R. Jaipuria School — Anti-Bullying Reporting",
+          url: "https://digitalcampaign.lovable.app/",
+          description: "Confidential bullying incident reporting for Seth M.R. Jaipuria School, run by the Digital Campaign Club.",
+          publisher: {
+            "@type": "EducationalOrganization",
+            name: "Seth M.R. Jaipuria School",
+          },
+        }),
+      },
+    ],
+  }),
 });
 
 function Index() {
@@ -83,6 +111,9 @@ function Index() {
                 className="mt-4 flex flex-col gap-2 sm:flex-row"
               >
                 <Input
+                  id="tracking-code"
+                  name="tracking-code"
+                  aria-label="Report tracking code"
                   value={code}
                   onChange={(e) => setCode(e.target.value.toUpperCase())}
                   placeholder="E.G. A1B2C3D4E5"

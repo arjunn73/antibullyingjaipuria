@@ -11,6 +11,17 @@ type Incident = {
 
 export const Route = createFileRoute("/track/$code")({
   component: TrackPage,
+  head: ({ params }) => ({
+    meta: [
+      { title: "Your Report — Anti-Bullying Reporting" },
+      { name: "description", content: "Private view of your submitted bullying report and any reply from the school administration team." },
+      { name: "robots", content: "noindex, nofollow" },
+      { property: "og:title", content: "Your Report — Anti-Bullying Reporting" },
+      { property: "og:description", content: "Private view of your submitted bullying report and any reply from the school administration team." },
+      { property: "og:url", content: `https://digitalcampaign.lovable.app/track/${params.code}` },
+    ],
+    links: [{ rel: "canonical", href: `https://digitalcampaign.lovable.app/track/${params.code}` }],
+  }),
 });
 
 function TrackPage() {

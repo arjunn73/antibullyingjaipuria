@@ -19,6 +19,16 @@ const schema = z.object({
 
 export const Route = createFileRoute("/report")({
   component: ReportPage,
+  head: () => ({
+    meta: [
+      { title: "Report an Incident — Anti-Bullying Reporting" },
+      { name: "description", content: "Submit a confidential bullying incident report to Seth M.R. Jaipuria School. Only administrators can see your submission; you'll get a code to track replies." },
+      { property: "og:title", content: "Report an Incident — Anti-Bullying Reporting" },
+      { property: "og:description", content: "Submit a confidential bullying incident report to Seth M.R. Jaipuria School. Only administrators can see your submission; you'll get a code to track replies." },
+      { property: "og:url", content: "https://digitalcampaign.lovable.app/report" },
+    ],
+    links: [{ rel: "canonical", href: "https://digitalcampaign.lovable.app/report" }],
+  }),
 });
 
 function ReportPage() {
@@ -115,22 +125,22 @@ function ReportPage() {
         <p className="mt-2 text-sm text-muted-foreground">Only administrators can see what you submit.</p>
 
         <form onSubmit={onSubmit} className="mt-8 space-y-5 rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8">
-          <Field label="Name" required>
-            <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} maxLength={100} />
+          <Field id="name" label="Name" required>
+            <Input id="name" name="name" autoComplete="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} maxLength={100} />
           </Field>
-          <Field label="Class Teacher" required>
-            <Input value={form.class_teacher} onChange={(e) => setForm({ ...form, class_teacher: e.target.value })} maxLength={100} />
+          <Field id="class_teacher" label="Class Teacher" required>
+            <Input id="class_teacher" name="class_teacher" value={form.class_teacher} onChange={(e) => setForm({ ...form, class_teacher: e.target.value })} maxLength={100} />
           </Field>
-          <Field label="Class" required>
-            <Input value={form.class_name} onChange={(e) => setForm({ ...form, class_name: e.target.value })} maxLength={50} placeholder="e.g. 10-B" />
+          <Field id="class_name" label="Class" required>
+            <Input id="class_name" name="class_name" value={form.class_name} onChange={(e) => setForm({ ...form, class_name: e.target.value })} maxLength={50} placeholder="e.g. 10-B" />
           </Field>
-          <Field label="Reporting Problem" required>
-            <Textarea rows={5} value={form.problem} onChange={(e) => setForm({ ...form, problem: e.target.value })} maxLength={4000} placeholder="Describe what happened…" />
+          <Field id="problem" label="Reporting Problem" required>
+            <Textarea id="problem" name="problem" rows={5} value={form.problem} onChange={(e) => setForm({ ...form, problem: e.target.value })} maxLength={4000} placeholder="Describe what happened…" />
           </Field>
-          <Field label="Witness" hint="Optional — anyone who saw what happened.">
-            <Input value={form.witness} onChange={(e) => setForm({ ...form, witness: e.target.value })} maxLength={500} />
+          <Field id="witness" label="Witness" hint="Optional — anyone who saw what happened.">
+            <Input id="witness" name="witness" value={form.witness} onChange={(e) => setForm({ ...form, witness: e.target.value })} maxLength={500} />
           </Field>
-          <Field label="Witness Photo" hint="Optional — attach a photo as evidence (max 10 MB). Only admins can view it.">
+          <Field id="witness_photo" label="Witness Photo" hint="Optional — attach a photo as evidence (max 10 MB). Only admins can view it.">
             {photoPreview ? (
               <div className="relative inline-block">
                 <img src={photoPreview} alt="Witness evidence preview" className="max-h-48 rounded-lg border border-border" />
@@ -161,10 +171,10 @@ function ReportPage() {
   );
 }
 
-function Field({ label, required, hint, children }: { label: string; required?: boolean; hint?: string; children: React.ReactNode }) {
+function Field({ id, label, required, hint, children }: { id?: string; label: string; required?: boolean; hint?: string; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
-      <Label className="text-sm font-medium">
+      <Label htmlFor={id} className="text-sm font-medium">
         {label} {required && <span className="text-destructive">*</span>}
       </Label>
       {children}
