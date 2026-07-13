@@ -1,0 +1,14 @@
+# Seth M.R. Jaipuria School — Anti-Bullying Website
+
+> A confidential incident reporting platform by the Digital Campaign Club at Seth M.R. Jaipuria School. Students can safely and privately report bullying incidents to school administrators.
+
+The site provides a simple, confidential channel for students to report bullying and other incidents. Reports are only visible to school administrators; submitters receive a tracking code to check for private replies from the school team.
+
+## Pages
+
+- [Home](/): Overview of the anti-bullying reporting service and entry point to submit or track a report.
+- [Report an Incident](/report): Form to submit a confidential bullying incident report, with optional witness photo.
+
+## Optional
+
+- [Check Reply](/track/): Look up the status and admin reply for a submitted report using a tracking code.
