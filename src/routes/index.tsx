@@ -11,13 +11,13 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Anti-Bullying Reporting — Seth M.R. Jaipuria School" },
+      { title: "Ummeed- You matter here. -A confidential space to speak up" },
       { name: "description", content: "A confidential space for students at Seth M.R. Jaipuria School to report bullying. Submissions are private and answered by school administrators." },
-      { property: "og:title", content: "Anti-Bullying Reporting — Seth M.R. Jaipuria School" },
+      { property: "og:title", content: "Ummeed- You matter here. -A confidential space to speak up" },
       { property: "og:description", content: "A confidential space for students at Seth M.R. Jaipuria School to report bullying. Submissions are private and answered by school administrators." },
       { property: "og:url", content: "https://digitalcampaign.lovable.app/" },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1c7dcb21-f134-4140-89be-7c95bdd9a3ab/id-preview-1ee534f7--0e7101ed-f35e-494d-ac7d-146e84ea5303.lovable.app-1782971400784.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1c7dcb21-f134-4140-89be-7c95bdd9a3ab/id-preview-1ee534f7--0e7101ed-f35e-494d-ac7d-146e84ea5303.lovable.app-1782971400784.png" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/66605392-7b52-4b88-ad9c-187dac32579f" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/66605392-7b52-4b88-ad9c-187dac32579f" },
     ],
     links: [{ rel: "canonical", href: "https://digitalcampaign.lovable.app/" }],
     scripts: [
