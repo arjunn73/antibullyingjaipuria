@@ -71,7 +71,7 @@ function Index() {
           <h1 className="text-4xl font-bold tracking-tight md:text-6xl" style={{ color: ACCENT }}>
             {SITE_TITLE}
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="mx-auto mt-6 max-w-xl whitespace-pre-line text-base leading-relaxed text-muted-foreground md:text-lg">
             {SITE_DESCRIPTION}
           </p>
 
