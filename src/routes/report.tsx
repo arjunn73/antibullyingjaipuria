@@ -19,6 +19,16 @@ const schema = z.object({
 
 export const Route = createFileRoute("/report")({
   component: ReportPage,
+  head: () => ({
+    meta: [
+      { title: "Report an Incident — Anti-Bullying Reporting" },
+      { name: "description", content: "Submit a confidential bullying incident report to Seth M.R. Jaipuria School. Only administrators can see your submission; you'll get a code to track replies." },
+      { property: "og:title", content: "Report an Incident — Anti-Bullying Reporting" },
+      { property: "og:description", content: "Submit a confidential bullying incident report to Seth M.R. Jaipuria School. Only administrators can see your submission; you'll get a code to track replies." },
+      { property: "og:url", content: "https://digitalcampaign.lovable.app/report" },
+    ],
+    links: [{ rel: "canonical", href: "https://digitalcampaign.lovable.app/report" }],
+  }),
 });
 
 function ReportPage() {
