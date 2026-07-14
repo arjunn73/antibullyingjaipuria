@@ -14,9 +14,9 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Bullying Prevention Online Help Desk — Seth M.R. Jaipuria School" },
+      { title: "Ummeed- You matter here. A confidential space to speak up" },
       { name: "description", content: "If you’re going through something, you’re not alone. Seth M.R. Jaipuria School, Digital Campaign Club, brings you a safe, confidential place to report bullying." },
-      { property: "og:title", content: "Bullying Prevention Online Help Desk — Seth M.R. Jaipuria School" },
+      { property: "og:title", content: "Ummeed- You matter here. A confidential space to speak up" },
       { property: "og:description", content: "If you’re going through something, you’re not alone. Seth M.R. Jaipuria School, Digital Campaign Club, brings you a safe, confidential place to report bullying." },
       { property: "og:url", content: "https://digitalcampaign.lovable.app/" },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/ltGVLVu03jMaoxJdRIuHEYh5nXR2/social-images/social-1784029900230-1000042265.webp" },
