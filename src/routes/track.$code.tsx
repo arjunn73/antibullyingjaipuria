@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { reportsDb } from "@/lib/reports-client";
+import { Badge } from "@/components/ui/badge";
 import { ArrowLeft } from "lucide-react";
 
 type Report = {
@@ -11,6 +12,8 @@ type Report = {
   problem: string;
   witness: string | null;
   created_at: string;
+  reply: string | null;
+  replied_at: string | null;
 };
 
 export const Route = createFileRoute("/track/$code")({
@@ -37,7 +40,7 @@ function TrackPage() {
     (async () => {
       const { data, error } = await reportsDb
         .from("reports")
-        .select("track_id, student_name, class_teacher, class, problem, witness, created_at")
+        .select("track_id, student_name, class_teacher, class, problem, witness, created_at, reply, replied_at")
         .eq("track_id", code)
         .maybeSingle();
       if (error) console.error(error);
@@ -65,9 +68,12 @@ function TrackPage() {
         ) : (
           <>
             <h1 className="mt-4 text-2xl font-bold tracking-tight">Your Report</h1>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Code: <code className="font-mono">{report.track_id}</code> · Submitted {new Date(report.created_at).toLocaleString()}
-            </p>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <Badge variant={report.reply?.trim() ? "default" : "secondary"}>{report.reply?.trim() ? "Replied" : "Pending"}</Badge>
+              <p className="text-xs text-muted-foreground">
+                Code: <code className="font-mono">{report.track_id}</code> · Submitted {new Date(report.created_at).toLocaleString()}
+              </p>
+            </div>
 
             <div className="mt-6 space-y-4 rounded-2xl border border-border bg-card p-6 shadow-sm">
               <Row label="Name" value={report.student_name} />
@@ -76,6 +82,20 @@ function TrackPage() {
               <Row label="Problem" value={report.problem} multiline />
               {report.witness && <Row label="Witness" value={report.witness} />}
             </div>
+
+            {report.reply?.trim() ? (
+              <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-sm dark:border-emerald-900/40 dark:bg-emerald-950/20">
+                <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">School reply</div>
+                <div className="mt-2 whitespace-pre-wrap">{report.reply}</div>
+                {report.replied_at ? (
+                  <p className="mt-3 text-xs text-muted-foreground">Replied on {new Date(report.replied_at).toLocaleString()}</p>
+                ) : null}
+              </div>
+            ) : (
+              <div className="mt-6 rounded-2xl border border-dashed border-border bg-card p-6 text-sm text-muted-foreground">
+                No reply has been sent yet. Please check back later.
+              </div>
+            )}
           </>
         )}
       </div>
