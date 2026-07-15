@@ -7,7 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -102,6 +102,30 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+function ThemeToggle() {
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof window === "undefined") return "light";
+    return (window.localStorage.getItem("theme") as "light" | "dark" | null) ?? "light";
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("dark", theme === "dark");
+    window.localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  return (
+    <button
+      type="button"
+      onClick={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
+      className="rounded-full border border-border bg-background/80 px-3 py-2 text-sm text-foreground shadow-sm transition hover:opacity-90"
+      aria-label="Toggle dark mode"
+    >
+      {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
+    </button>
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const router = useRouter();
@@ -150,8 +174,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
-      <Toaster richColors position="top-center" />
+      <div className="min-h-screen bg-background text-foreground">
+        <div className="fixed right-4 top-4 z-50">
+          <ThemeToggle />
+        </div>
+        <Outlet />
+        <Toaster richColors position="top-center" />
+      </div>
     </QueryClientProvider>
   );
 }
