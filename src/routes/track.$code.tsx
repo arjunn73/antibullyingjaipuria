@@ -1,12 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { ArrowLeft, MessageSquare, Clock } from "lucide-react";
+import { reportsDb } from "@/lib/reports-client";
+import { ArrowLeft } from "lucide-react";
 
-type Incident = {
-  tracking_code: string; name: string; class_teacher: string; class_name: string;
-  problem: string; witness: string | null; reply: string | null;
-  replied_at: string | null; created_at: string;
+type Report = {
+  track_id: string;
+  student_name: string;
+  class_teacher: string;
+  class: string;
+  problem: string;
+  witness: string | null;
+  created_at: string;
 };
 
 export const Route = createFileRoute("/track/$code")({
@@ -14,10 +18,10 @@ export const Route = createFileRoute("/track/$code")({
   head: ({ params }) => ({
     meta: [
       { title: "Your Report — Anti-Bullying Reporting" },
-      { name: "description", content: "Private view of your submitted bullying report and any reply from the school administration team." },
+      { name: "description", content: "Private view of your submitted bullying report." },
       { name: "robots", content: "noindex, nofollow" },
       { property: "og:title", content: "Your Report — Anti-Bullying Reporting" },
-      { property: "og:description", content: "Private view of your submitted bullying report and any reply from the school administration team." },
+      { property: "og:description", content: "Private view of your submitted bullying report." },
       { property: "og:url", content: `https://digitalcampaign.lovable.app/track/${params.code}` },
     ],
     links: [{ rel: "canonical", href: `https://digitalcampaign.lovable.app/track/${params.code}` }],
@@ -27,13 +31,17 @@ export const Route = createFileRoute("/track/$code")({
 function TrackPage() {
   const { code } = Route.useParams();
   const [loading, setLoading] = useState(true);
-  const [incident, setIncident] = useState<Incident | null>(null);
+  const [report, setReport] = useState<Report | null>(null);
 
   useEffect(() => {
     (async () => {
-      const { data, error } = await supabase.rpc("get_incident_by_code", { _code: code });
+      const { data, error } = await reportsDb
+        .from("reports")
+        .select("track_id, student_name, class_teacher, class, problem, witness, created_at")
+        .eq("track_id", code)
+        .maybeSingle();
       if (error) console.error(error);
-      setIncident((data as Incident[] | null)?.[0] ?? null);
+      setReport((data as Report | null) ?? null);
       setLoading(false);
     })();
   }, [code]);
@@ -47,7 +55,7 @@ function TrackPage() {
 
         {loading ? (
           <div className="mt-10 text-center text-muted-foreground">Loading…</div>
-        ) : !incident ? (
+        ) : !report ? (
           <div className="mt-10 rounded-2xl border border-border bg-card p-8 text-center">
             <h1 className="text-xl font-semibold">Report not found</h1>
             <p className="mt-2 text-sm text-muted-foreground">
@@ -58,36 +66,15 @@ function TrackPage() {
           <>
             <h1 className="mt-4 text-2xl font-bold tracking-tight">Your Report</h1>
             <p className="mt-1 text-xs text-muted-foreground">
-              Code: <code className="font-mono">{incident.tracking_code}</code> · Submitted {new Date(incident.created_at).toLocaleString()}
+              Code: <code className="font-mono">{report.track_id}</code> · Submitted {new Date(report.created_at).toLocaleString()}
             </p>
 
             <div className="mt-6 space-y-4 rounded-2xl border border-border bg-card p-6 shadow-sm">
-              <Row label="Name" value={incident.name} />
-              <Row label="Class teacher" value={incident.class_teacher} />
-              <Row label="Class" value={incident.class_name} />
-              <Row label="Problem" value={incident.problem} multiline />
-              {incident.witness && <Row label="Witness" value={incident.witness} />}
-            </div>
-
-            <div className="mt-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
-              <div className="flex items-center gap-2">
-                <MessageSquare className="h-5 w-5 text-primary" />
-                <h2 className="text-lg font-semibold">Admin Reply</h2>
-              </div>
-              {incident.reply ? (
-                <>
-                  <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed">{incident.reply}</p>
-                  {incident.replied_at && (
-                    <p className="mt-3 text-xs text-muted-foreground">
-                      Replied {new Date(incident.replied_at).toLocaleString()}
-                    </p>
-                  )}
-                </>
-              ) : (
-                <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
-                  <Clock className="h-4 w-4" /> Waiting for an admin to reply. Check back soon.
-                </div>
-              )}
+              <Row label="Name" value={report.student_name} />
+              <Row label="Class teacher" value={report.class_teacher} />
+              <Row label="Class" value={report.class} />
+              <Row label="Problem" value={report.problem} multiline />
+              {report.witness && <Row label="Witness" value={report.witness} />}
             </div>
           </>
         )}
