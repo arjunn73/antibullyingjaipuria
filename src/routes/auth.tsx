@@ -3,11 +3,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { supabase } from "@/integrations/supabase/client";
+import { reportsDb } from "@/lib/reports-client";
 import { toast } from "sonner";
 import { ArrowLeft, Lock } from "lucide-react";
-
-const EMAIL_DOMAIN = "@jaipuria.local";
 
 export const Route = createFileRoute("/auth")({
   component: AuthPage,
@@ -26,7 +24,7 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -34,11 +32,10 @@ function AuthPage() {
     e.preventDefault();
     setBusy(true);
     try {
-      // Make sure the fixed admin exists (idempotent)
-      await fetch("/api/public/setup-admin", { method: "POST" }).catch(() => {});
-
-      const email = username.trim().toLowerCase() + EMAIL_DOMAIN;
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { error } = await reportsDb.auth.signInWithPassword({
+        email: email.trim().toLowerCase(),
+        password,
+      });
       if (error) throw error;
       toast.success("Signed in");
       navigate({ to: "/admin" });
@@ -66,15 +63,15 @@ function AuthPage() {
 
           <form onSubmit={submit} className="mt-6 space-y-4">
             <div>
-              <Label htmlFor="admin-username">Username</Label>
+              <Label htmlFor="admin-email">Email</Label>
               <Input
-                id="admin-username"
-                name="username"
-                autoComplete="username"
+                id="admin-email"
+                name="email"
+                type="email"
+                autoComplete="email"
                 required
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="digital.campaign"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
