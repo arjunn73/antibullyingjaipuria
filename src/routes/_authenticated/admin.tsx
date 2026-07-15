@@ -93,9 +93,22 @@ function AdminPage() {
             </div>
 
             <div className="mt-4 space-y-2 rounded-lg bg-muted p-4 text-sm">
-              <div><span className="font-medium">Problem:</span> <span className="whitespace-pre-wrap">{r.problem}</span></div>
-              {r.witness && <div><span className="font-medium">Witness:</span> {r.witness}</div>}
-            </div>
+              <div>
+                  <span className="font-medium">Problem:</span>{" "}
+                  <span className="whitespace-pre-wrap">{r.problem}</span>
+              </div>
+              {r.witness && (
+              <div>
+                    <span className="font-medium">Witness:</span> {r.witness}
+              </div>
+              )}
+          </div>
+
+<div className="mt-4 flex justify-end">
+  <Button>
+    Reply to Report
+  </Button>
+</div>
           </div>
         ))}
       </main>
