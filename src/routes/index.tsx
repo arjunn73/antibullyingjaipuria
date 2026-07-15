@@ -14,10 +14,10 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Ummeed- You matter here." },
-      { name: "description", content: "If you’re going through something, you’re not alone. Seth M.R. Jaipuria School, Digital Campaign Club, brings you a safe, confidential place to report bullying." },
-      { property: "og:title", content: "Ummeed- You matter here." },
-      { property: "og:description", content: "If you’re going through something, you’re not alone. Seth M.R. Jaipuria School, Digital Campaign Club, brings you a safe, confidential place to report bullying." },
+      { title: "Bullying Prevention Online Help Desk" },
+      { name: "description", content: "If you’re going through something, you’re not alone.\n\nSeth M.R. Jaipuria School, Digital Campaign Club, brings you a safe, confidential place to report bullying.\n\nRest assured, we’re here to listen and support you." },
+      { property: "og:title", content: "Bullying Prevention Online Help Desk" },
+      { property: "og:description", content: "If you’re going through something, you’re not alone.\n\nSeth M.R. Jaipuria School, Digital Campaign Club, brings you a safe, confidential place to report bullying.\n\nRest assured, we’re here to listen and support you." },
       { property: "og:url", content: "https://digitalcampaign.lovable.app/" },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/78e38ef1-e05f-473d-bf18-fce19087f9a9" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/78e38ef1-e05f-473d-bf18-fce19087f9a9" },
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
           "@type": "WebSite",
           name: "Bullying Prevention Online Help Desk — Seth M.R. Jaipuria School",
           url: "https://digitalcampaign.lovable.app/",
-          description: "If you’re going through something, you’re not alone. Seth M.R. Jaipuria School, Digital Campaign Club, brings you a safe, confidential place to report bullying.",
+          description: "If you’re going through something, you’re not alone.\n\nSeth M.R. Jaipuria School, Digital Campaign Club, brings you a safe, confidential place to report bullying.\n\nRest assured, we’re here to listen and support you.",
           publisher: {
             "@type": "EducationalOrganization",
             name: "Seth M.R. Jaipuria School",
