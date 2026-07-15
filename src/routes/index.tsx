@@ -19,11 +19,11 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Bullying Prevention Online Help Desk" },
       { property: "og:description", content: "If you’re going through something, you’re not alone.\n\nSeth M.R. Jaipuria School, Digital Campaign Club, brings you a safe, confidential place to report bullying.\n\nRest assured, we’re here to listen and support you." },
       { property: "og:url", content: "https://digitalcampaign.lovable.app/" },
-      { property: "og:image", content: "https://antibullyingjaipuria.lovable.app/__l5e/assets-v1/fd4d4de1-32bc-4e26-a91e-b685a96e435f/og-home.jpg" },
+      { property: "og:image", content: "https://antibullyingjaipuria.lovable.app/__l5e/assets-v1/6c1ca2e2-20f6-4a20-9a3f-4b04f2d54fe0/og-home.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "Bullying Prevention Online Help Desk — Seth M.R. Jaipuria School, Digital Campaign Club" },
-      { name: "twitter:image", content: "https://antibullyingjaipuria.lovable.app/__l5e/assets-v1/fd4d4de1-32bc-4e26-a91e-b685a96e435f/og-home.jpg" },
+      { name: "twitter:image", content: "https://antibullyingjaipuria.lovable.app/__l5e/assets-v1/6c1ca2e2-20f6-4a20-9a3f-4b04f2d54fe0/og-home.png" },
     ],
     links: [{ rel: "canonical", href: "https://digitalcampaign.lovable.app/" }],
     scripts: [
